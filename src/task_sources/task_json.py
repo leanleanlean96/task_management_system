@@ -11,13 +11,12 @@ def parse_json_file(path: Path) -> list[dict[str, Any]]:
     parsed_tasks = []
     with path.open() as json_file:
         for line_num, line in enumerate(json_file):
-            if not line:
+            if not line.strip():
                 continue
-            line = line.strip()
             try:
-                parsed_tasks.append(json.loads(line))
-            except json.JSONDecodeError as error:
-                raise ValueError(f"Bad JSON at {path}:{line_num}: {error}") from error
+                parsed_tasks.append(json.loads(line.strip()))
+            except json.JSONDecodeError:
+                continue
     return parsed_tasks
 
 

@@ -15,9 +15,9 @@ def extract_task_fields(
             fields[0],
             fields[1],
             fields[2],
-            fields[3].lower() in ('true', '1', 'yes', 'y'),
+            fields[3].lower() in ("true", "1", "yes", "y"),
             datetime.fromisoformat(fields[4]),
-            datetime.fromisoformat(fields[5])
+            datetime.fromisoformat(fields[5]),
         )
     except IndexError:
         raise ValueError(

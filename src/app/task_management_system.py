@@ -12,5 +12,5 @@ class TaskManagementSystem:
         for src in self.task_sources:
             if not isinstance(src, TaskSource):
                 raise TypeError("The specified source is not a valid TaskSource")
-        for task in src.get_tasks():
-            yield task
+            for task in src.get_tasks():
+                yield task
