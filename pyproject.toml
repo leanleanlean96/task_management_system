@@ -1,0 +1,39 @@
+[project]
+name = "task-management-platform"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "leanleanlean96",email = "kiraaff2289@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "typer (>=0.24.1,<0.25.0)"
+]
+
+[tool.poetry]
+packages = [{include = "task_management_platform", from = "src"}]
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.15.7"
+mypy = "^1.19.1"
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["I"]  # I001-I005: isort violations
+ignore = []
+
+[tool.ruff.lint.isort]
+known-first-party = ["src"]  # Your package
+
+[tool.poetry.scripts]
+check = "bash: ruff check --fix . && mypy src/"
+lint-fix = "bash: ruff check --fix . && ruff format ."
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
