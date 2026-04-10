@@ -1,6 +1,7 @@
 import json
 from collections.abc import Iterable
 from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -46,8 +47,8 @@ class JsonSource:
                     name=task_name,
                     description=task_desc,
                     is_completed=is_completed,
-                    creation_date=creation_date,
-                    completion_date=completion_date,
+                    creation_date=datetime.fromisoformat(creation_date) if creation_date else None,
+                    completion_date=datetime.fromisoformat(completion_date) if completion_date else None,
                 )
             except KeyError as e:
                 print(f"An error occured: {e}")
