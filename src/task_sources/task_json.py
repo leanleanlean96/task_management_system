@@ -16,7 +16,7 @@ def parse_json_file(path: Path) -> list[dict[str, Any]]:
             try:
                 parsed_tasks.append(json.loads(line.strip()))
             except json.JSONDecodeError:
-                continue
+                print(f"The input json is invalid: {line_num} : {line}")
     return parsed_tasks
 
 
@@ -49,5 +49,5 @@ class JsonSource:
                     creation_date=creation_date,
                     completion_date=completion_date,
                 )
-            except IndexError as e:
+            except KeyError as e:
                 print(f"An error occured: {e}")
