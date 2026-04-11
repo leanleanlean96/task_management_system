@@ -37,18 +37,10 @@ class JsonSource:
         for task_dict in parse_json_file(self.path):
             try:
                 task_id = task_dict["id"]
-                task_name = task_dict["name"]
-                task_desc = task_dict["description"]
-                is_completed = task_dict["is_completed"]
-                creation_date = task_dict["creation_date"]
-                completion_date = task_dict["completion_date"]
+                payload = task_dict["payload"]
                 yield Task(
                     id=task_id,
-                    name=task_name,
-                    description=task_desc,
-                    is_completed=is_completed,
-                    creation_date=datetime.fromisoformat(creation_date) if creation_date else None,
-                    completion_date=datetime.fromisoformat(completion_date) if completion_date else None,
+                    payload=payload,
                 )
             except KeyError as e:
                 print(f"An error occured: {e}")
