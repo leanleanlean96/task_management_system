@@ -44,4 +44,4 @@ class TaskGenerator:
             completion_date = (
                 None if not is_completed else random.choice(self.completion_date_list)
             )
-            yield Task(id, name, desc, is_completed, cr_date, completion_date)
+            yield Task(id, payload=[name, desc, is_completed, cr_date, completion_date])

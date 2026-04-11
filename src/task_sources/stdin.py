@@ -14,15 +14,11 @@ def extract_task_fields(
     try:
         return (
             fields[0],
-            fields[1],
-            fields[2],
-            fields[3].lower() in ("true", "1", "yes", "y"),
-            datetime.fromisoformat(fields[4]),
-            datetime.fromisoformat(fields[5]),
+            fields[1:],
         )
     except IndexError:
         raise ValueError(
-            f"Line: {line_num}. Task must contain at least 6 valid parameters, separated by ';'"
+            f"Line: {line_num}. Task must contain at least 2 valid parameters, separated by ';'"
         )
 
 
@@ -40,19 +36,11 @@ class StdinSource:
                     continue
                 (
                     task_id,
-                    task_name,
-                    task_desc,
-                    is_completed,
-                    creation_date,
-                    completion_date,
+                    payload,
                 ) = extract_task_fields(fields, line_num)
                 yield Task(
                     id=task_id,
-                    name=task_name,
-                    description=task_desc,
-                    is_completed=is_completed,
-                    creation_date=creation_date,
-                    completion_date=completion_date,
+                    payload=payload
                 )
     except Exception as e:
         print("An error occured: {e}")
