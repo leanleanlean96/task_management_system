@@ -27,9 +27,10 @@ class StdinSource:
     """Source for stdin task input"""
     stream: TextIO = sys.stdin
     name: str = "stdin"
-    try:
+    
 
-        def get_tasks(self) -> Iterable[Task]:
+    def get_tasks(self) -> Iterable[Task]:
+        try:
             for line_num, line in enumerate(self.stream, start=1):
                 fields = line.strip().split(";")
                 if not line.strip():
@@ -42,5 +43,6 @@ class StdinSource:
                     id=task_id,
                     payload=payload
                 )
-    except Exception as e:
-        print("An error occured: {e}")
+        except Exception as e:
+            print("An error occured: {e}")
+    
